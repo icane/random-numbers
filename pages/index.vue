@@ -18,6 +18,10 @@
                   label="Número de direcciones a seleccionar"
                   :rules="[numberRule]"
                 ></v-text-field>
+                <v-text-field
+                  v-model="filename"
+                  label="Nombre del fichero"
+                ></v-text-field>
               </v-col>
             </v-row>
             <v-row align="center" justify="center">
@@ -43,6 +47,7 @@ export default {
       dir_num_min: 0,
       select_dir: 5,
       selected_dirs: [],
+      filename: 'sorteo_direcciones',
       numberRule: (v) => {
         if (!isNaN(parseInt(v)) && v >= 1) return true
         return 'El número debe ser mayor que 1'
@@ -70,7 +75,7 @@ export default {
         skipEmptyLines: true,
       })
       console.log(csv)
-      this.download('Direcciones_' + new Date() + '.csv', csv)
+      this.download(this.filename + '.csv', csv)
     },
     getRandomInt(min, max) {
       min = Math.ceil(min)
