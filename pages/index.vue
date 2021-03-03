@@ -61,20 +61,17 @@ export default {
       this.selected_dirs = []
       const array = [...Array(this.dir_num + 1).keys()]
       array.shift() // array starts at 1
-      console.log(array)
 
       for (let i = 0; i < this.select_dir; i++) {
         const random = Math.floor(Math.random() * array.length)
         this.selected_dirs.push({ number: array[random] })
         array.splice(random, 1)
       }
-      console.log(this.selected_dirs)
       const csv = papaparse.unparse(this.selected_dirs, {
         delimiter: ';',
         encoding: 'ISO-8859-1',
         skipEmptyLines: true,
       })
-      console.log(csv)
       this.download(this.filename + '.csv', csv)
     },
     getRandomInt(min, max) {
